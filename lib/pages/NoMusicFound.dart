@@ -46,15 +46,17 @@ class NoMusicFound extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(50.0),
-                    child: RaisedButton.icon(
+                    child: ElevatedButton.icon(
                       icon: Icon(Icons.exit_to_app),
                       onPressed: () {
                         SystemNavigator.pop();
                       },
-                      elevation: 6.0,
+                      style: ButtonStyle(
+                        elevation: MaterialStateProperty.all(6),
+                      ),
                       label: Text("Exit"),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

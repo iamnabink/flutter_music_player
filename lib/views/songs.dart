@@ -48,91 +48,86 @@ class _songsState extends State<Songs> {
                 child: new CircularProgressIndicator(),
               )
             : Column(children: <Widget>[
-          SizedBox(
-            width: MediaQuery
-                .of(context)
-                .size
-                .width - 20,
-            child: OutlineButton(
-
-                child: Text("Play All", style: TextStyle(
-                    fontSize: 20
-                ),),
-                onPressed: () {
-                  MyQueue.songs = songs;
-                  Navigator.of(context)
-                      .push(new MaterialPageRoute(builder: (context) {
-                    return new NowPlaying(widget.db, songs, 0, 0);
-                  }));
-                },
-                shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0),
-                )),
-          ),
-          Expanded(
-            child: new ListView.builder(
-              itemCount: songs.length,
-              itemBuilder: (context, i) =>
-              new Column(
-                children: <Widget>[
-                  new Divider(
-                    height: 8.0,
-                  ),
-                  new ListTile(
-                    leading: new Hero(
-                      tag: songs[i].id,
-                      child: avatar(context, getImage(songs[i]),
-                          songs[i].title),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 20,
+                  child: OutlinedButton(
+                    child: Text(
+                      "Play All",
+                      style: TextStyle(fontSize: 20),
                     ),
-                    title: new Text(songs[i].title,
-                        maxLines: 1,
-                        style: new TextStyle(fontSize: 18.0)),
-                    subtitle: new Text(
-                      songs[i].artist,
-                      maxLines: 1,
-                      style: new TextStyle(
-                          fontSize: 12.0, color: Colors.grey),
-                    ),
-                    trailing: new Text(
-                        new Duration(milliseconds: songs[i].duration)
-                            .toString()
-                            .split('.')
-                            .first,
-                        style: new TextStyle(
-                            fontSize: 12.0, color: Colors.grey)),
-                    onTap: () {
+                    onPressed: () {
                       MyQueue.songs = songs;
-                      Navigator.of(context).push(
-                          new MaterialPageRoute(
-                              builder: (context) =>
-                              new NowPlaying(
-                                  widget.db, MyQueue.songs, i, 0)));
+                      Navigator.of(context)
+                          .push(new MaterialPageRoute(builder: (context) {
+                        return new NowPlaying(widget.db, songs, 0, 0);
+                      }));
                     },
-                    onLongPress: () {
-                      setFav(songs[i]);
-                    },
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0))),
+                    ),
                   ),
-                ],
-              ),
-            ),
-          )
-        ]));
+                ),
+                Expanded(
+                  child: new ListView.builder(
+                    itemCount: songs.length,
+                    itemBuilder: (context, i) => new Column(
+                      children: <Widget>[
+                        new Divider(
+                          height: 8.0,
+                        ),
+                        new ListTile(
+                          leading: new Hero(
+                            tag: songs[i].id,
+                            child: avatar(
+                                context, getImage(songs[i]), songs[i].title),
+                          ),
+                          title: new Text(songs[i].title,
+                              maxLines: 1,
+                              style: new TextStyle(fontSize: 18.0)),
+                          subtitle: new Text(
+                            songs[i].artist,
+                            maxLines: 1,
+                            style: new TextStyle(
+                                fontSize: 12.0, color: Colors.grey),
+                          ),
+                          trailing: new Text(
+                              new Duration(milliseconds: songs[i].duration)
+                                  .toString()
+                                  .split('.')
+                                  .first,
+                              style: new TextStyle(
+                                  fontSize: 12.0, color: Colors.grey)),
+                          onTap: () {
+                            MyQueue.songs = songs;
+                            Navigator.of(context).push(new MaterialPageRoute(
+                                builder: (context) => new NowPlaying(
+                                    widget.db, MyQueue.songs, i, 0)));
+                          },
+                          onLongPress: () {
+                            setFav(songs[i]);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ]));
   }
 
   Future<void> setFav(song) {
     showDialog(
-      context: context,
-      child: new AlertDialog(
+      builder: (context) => new AlertDialog(
         title: new Text('Add this to favourites?'),
         content: new Text(song.title),
         actions: <Widget>[
-          new FlatButton(
+          new TextButton(
             onPressed: () => Navigator.of(context).pop(false),
             child: new Text(
               'No',
             ),
           ),
-          new FlatButton(
+          new TextButton(
             onPressed: () async {
               await widget.db.favSong(song);
 
@@ -142,6 +137,7 @@ class _songsState extends State<Songs> {
           ),
         ],
       ),
+      context: context,
     );
   }
 }
