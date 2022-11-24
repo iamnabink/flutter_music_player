@@ -1,37 +1,37 @@
 name: musicplayer
 description: A new Flutter project.
 
+environment:
+  sdk: ">=2.8.0 <3.0.0"
+
 dependencies:
   flutter:
     sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.0
+  cupertino_icons: ^1.0.5
   flute_music_player:
   sqflite:
   path_provider:
   url_launcher: 3.0.1
-  shared_preferences: 
+  shared_preferences:
   media_notification: ^0.0.5
   dynamic_theme: ^1.0.1
-  scoped_model: 
+  scoped_model:
   share: ^0.6.1+1
   font_awesome_flutter:
   floating_search_bar:
 
-  
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: 
+  flutter_launcher_icons:
 
 flutter_icons:
   android: true
   ios: true
   image_path: "images/logo.png"
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
@@ -49,12 +49,11 @@ flutter:
     - images/sad.png
 
   fonts:
-      - family: Raleway
-        fonts:
-          - asset: fonts/Raleway-Regular.ttf
-          - asset: fonts/Raleway-Italic.ttf
-            style: italic
-     
+    - family: Raleway
+      fonts:
+        - asset: fonts/Raleway-Regular.ttf
+        - asset: fonts/Raleway-Italic.ttf
+          style: italic
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -89,5 +88,5 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
-  # For details regarding fonts from package dependencies, 
+  # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages

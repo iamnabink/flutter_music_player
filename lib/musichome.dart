@@ -150,7 +150,7 @@ class _musicState extends State<MusicHome> {
           icon: new Icon(
             d.icon,
           ),
-          title: new Text(d.title),
+          label: d.title,
           backgroundColor: Theme.of(context).primaryColor,
         ),
       );
@@ -204,9 +204,7 @@ class _musicState extends State<MusicHome> {
                   children: <Widget>[
                     new ListTile(
                         leading: new Icon(Icons.settings,
-                            color: Theme
-                                .of(context)
-                                .accentColor),
+                            color: Theme.of(context).accentColor),
                         title: new Text("Settings"),
                         onTap: () {
                           Navigator.of(context).pop();
@@ -215,7 +213,7 @@ class _musicState extends State<MusicHome> {
                             return new Settings();
                           }));
                         }),
-                   /* new ListTile(
+                    /* new ListTile(
                       leading: new Icon(Icons.info,
                           color: Theme
                               .of(context)
@@ -232,34 +230,26 @@ class _musicState extends State<MusicHome> {
                     Divider(),
                     new ListTile(
                       leading: Icon(Icons.share,
-                          color: Theme
-                              .of(context)
-                              .accentColor),
+                          color: Theme.of(context).accentColor),
                       title: Text("Share"),
                       onTap: () {
-                        Share.share(
-                            "");
+                        Share.share("");
                         Navigator.of(context).pop();
                       },
                     ),
                     new ListTile(
                       leading: Icon(Icons.star,
-                          color: Theme
-                              .of(context)
-                              .accentColor),
+                          color: Theme.of(context).accentColor),
                       title: Text("Rate the app"),
                       onTap: () {
                         Navigator.of(context).pop();
 
-                        launchUrl(
-                            "");
+                        launchUrl("");
                       },
                     ),
                     new ListTile(
                       leading: Icon(FontAwesomeIcons.donate,
-                          color: Theme
-                              .of(context)
-                              .accentColor),
+                          color: Theme.of(context).accentColor),
                       title: Text("Donate"),
                       onTap: () {
                         Navigator.of(context).pop();
@@ -294,18 +284,17 @@ class _musicState extends State<MusicHome> {
       });
     } else
       return showDialog(
-            context: context,
-            child: new AlertDialog(
+            builder: (context) => new AlertDialog(
               title: new Text('Are you sure?'),
               content: new Text('music player will be stopped..'),
               actions: <Widget>[
-                new FlatButton(
+                new TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
                   child: new Text(
                     'No',
                   ),
                 ),
-                new FlatButton(
+                new TextButton(
                   onPressed: () {
                     MyQueue.player.stop();
                     SystemNavigator.pop();
@@ -314,6 +303,7 @@ class _musicState extends State<MusicHome> {
                 ),
               ],
             ),
+            context: context,
           ) ??
           false;
   }

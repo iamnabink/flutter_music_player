@@ -11,18 +11,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new DynamicTheme(
         defaultBrightness: Brightness.light,
-        data: (brightness) =>
-        new ThemeData(
-          primarySwatch: Colors.deepPurple,
-          accentColor: Colors.deepPurpleAccent,
-          fontFamily: 'Raleway',
-          brightness: brightness,
-        ),
+        data: (brightness) => new ThemeData(
+              primarySwatch: Colors.deepPurple,
+              accentColor: Colors.deepPurpleAccent,
+              fontFamily: 'Raleway',
+              brightness: brightness,
+            ),
         themedWidgetBuilder: (context, theme) {
           return ScopedModel<SongModel>(
             model: new SongModel(),
             child: new MaterialApp(
-
               title: 'Music Player',
               theme: theme,
               debugShowCheckedModeBanner: false,
